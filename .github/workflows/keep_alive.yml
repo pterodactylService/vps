@@ -1,0 +1,14 @@
+name: 24-7-Runner
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Automatic restart every 6 hours
+  workflow_dispatch:      # Ability to connect manually
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Python
+        run: python main.py
