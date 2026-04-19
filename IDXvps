@@ -44,9 +44,9 @@ echo -e "${RESET}"
 }
 
 # -------------------------
-# Show Animated Logo
+# Show banner Logo
 # -------------------------
-animate_logo
+banner
 
 # -------------------------
 # Updating checking logs
