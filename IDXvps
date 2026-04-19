@@ -76,8 +76,9 @@ google_url="$(echo -n "${PROC_STAT[0]}${PROC_STAT[1]}${PROC_STAT[2]}${PROC_STAT[
 echo -e "${YELLOW}Select an option:${RESET}"
 echo -e "${GREEN}1) GitHub Real VPS${RESET}"
 echo -e "${BLUE}2) Google IDX Real VPS${RESET}"
-echo -e "${RED}3) Exit${RESET}"
-echo -ne "${YELLOW}Enter your choice (1-3): ${RESET}"
+echo -e "${CYAN}3) Real VPS - Any location${RESET}"
+echo -e "${RED}4) Exit${RESET}"
+echo -ne "${YELLOW}Enter your choice (1-4): ${RESET}"
 read choice
 
 case $choice in
@@ -123,6 +124,11 @@ EOF
     ;;
 
   3)
+    echo -e "${CYAN}Running Real VPS - Any location...${RESET}"
+    bash <(curl -fsSL https://raw.githubusercontent.com/pterodactylService/vps/refs/heads/main/nokvm.sh)
+    ;;
+
+  4)
     echo -e "${RED}Exiting...${RESET}"
     exit 0
     ;;
