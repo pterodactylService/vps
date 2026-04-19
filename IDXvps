@@ -85,64 +85,28 @@ case $choice in
     echo -e "${GREEN}Running GitHub Real VPS...${RESET}"
     bash <(curl -fsSL "$github_url")
     ;;
+
   2)
     echo -e "${BLUE}Running Google IDX Real VPS...${RESET}"
+    
     cd
-    rm -rf myapp
-    rm -rf flutter
-    cd vps123
+    rm -rf myapp flutter
+    cd vps123 || exit
+
     if [ ! -d ".idx" ]; then
       mkdir .idx
       cd .idx
+
       cat <<EOF > dev.nix
-{ pkgs, ... }: {
-  # Which nixpkgs channel to use
-  channel = "stable-24.05"; # or "unstable"
-
-  # Packages to be installed in the development environment
-  packages = with pkgs; [
-    unzip
-    openssh
-    git
-    qemu_kvm
-    sudo
-    cdrkit
-    cloud-utils
-    qemu
-  ];
-
-  # Environment variables for the workspace
-  env = {
-    # Example: set default editor
-    EDITOR = "nano";
-  };
-
-  idx = {
-    # Extensions from https://open-vsx.org (use "publisher.id")
-    extensions = [
-      "Dart-Code.flutter"
-      "Dart-Code.dart-code"
-    ];
-
-    workspace = {
-      # Runs when a workspace is first created
-      onCreate = { };
-
-      # Runs each time the workspace is (re)started
-      onStart = { };
-    };
-
-    # Disable previews completely
-    previews = {
-      enable = false;
-    };
-  };
-}
+# (քո nix config-ը թող մնա)
 EOF
+
       cd ..
     fi
+
     echo -ne "${YELLOW}Do you want to continue? (y/n): ${RESET}"
     read confirm
+
     case "$confirm" in
       [yY]*)
         bash <(curl -fsSL https://raw.githubusercontent.com/shadowcodeofficial/vm/refs/heads/main/vps.sh)
@@ -152,18 +116,22 @@ EOF
         exit 0
         ;;
       *)
-        echo -e "${RED}Invalid input! Operation cancelled.${RESET}"
+        echo -e "${RED}Invalid input!${RESET}"
         exit 1
-      ;;
-    3)
-    echo -e "${RED}Exiting...${RESET}"
-    exit 0 
+        ;;
+    esac
     ;;
- esac
+
+  3)
+    echo -e "${RED}Exiting...${RESET}"
+    exit 0
+    ;;
+
   *)
-    echo -e "${RED}Invalid choice! Please select 1, 2, or 3.${RESET}"
+    echo -e "${RED}Invalid choice!${RESET}"
     exit 1
     ;;
+esac
 
 # -------------------------
 # Made by ShadowCraftMC done!
