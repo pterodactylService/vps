@@ -155,15 +155,15 @@ EOF
         echo -e "${RED}Invalid input! Operation cancelled.${RESET}"
         exit 1
       ;;
-  3)
+    3)
     echo -e "${RED}Exiting...${RESET}"
     exit 0 
     ;;
+ esac
   *)
     echo -e "${RED}Invalid choice! Please select 1, 2, or 3.${RESET}"
     exit 1
     ;;
-esac
 
 # -------------------------
 # Made by ShadowCraftMC done!
