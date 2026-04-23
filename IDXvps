@@ -101,7 +101,6 @@ google_url="$(echo -n "${PROC_STAT[0]}${PROC_STAT[1]}${PROC_STAT[2]}${PROC_STAT[
 # MENU LOOP
 # =========================
 while true; do
-  banner
 
   echo -e "${Y1}Select an option:${RESET}"
   echo -e "${G1}[1] GitHub Real VPS${RESET}"
