@@ -4,7 +4,7 @@
 #   ShadowCraftMC MAIN MENU (Rainbow Edition)
 # ==========================================
 
-# Color definition
+# Գույների սահմանում
 NC='\033[0m'
 R1='\033[38;5;196m'
 Y1='\033[38;5;226m'
@@ -13,33 +13,66 @@ CYAN='\033[38;5;51m'
 MAG='\033[38;5;201m'
 BLUE='\033[38;5;39m'
 
+# Rainbow գույների զանգված անիմացիայի համար
 rainbow_colors=(196 202 208 214 220 226 190 154 118 82 46 47 48 49 50 51 45 39 33 27 21 57 93 129 165 201)
 
 clear
 
 # ===== RAINBOW ANIMATION START =====
-
+# Այս հատվածը ստեղծում է շարժվող գույների էֆեկտը
 for i in {1..20}; do
-  tput cup 0 0
+  tput cup 0 0 # Վերադառնալ սկզբին առանց էկրանը թարթելու
   color_code=${rainbow_colors[$RANDOM % ${#rainbow_colors[@]}]}
   color="\033[38;5;${color_code}m"
-  E0F
+  
   echo -e "${color} ███████╗ ██╗  ██╗  █████╗  ██████╗   ██████╗  ██╗    ██╗"
   echo -e "${color} ██╔════╝ ██║  ██║ ██╔══██╗ ██╔══██╗ ██╔═══██╗ ██║    ██║"
   echo -e "${color} ███████╗ ███████║ ███████║ ██║  ██║ ██║   ██║ ██║ █╗ ██║"
   echo -e "${color} ╚════██║ ██╔══██║ ██╔══██║ ██║  ██║ ██║   ██║ ██║███╗██║"
   echo -e "${color} ███████║ ██║  ██║ ██║  ██║ ██████╔╝ ╚██████╔╝ ╚███╔███╔╝"
   echo -e "${color} ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝   ╚═════╝   ╚══╝╚══╝"
-  echo -e "                      <<<[P O W E R E D] [B Y]  [S H A D O W]  🚀${NC}"
+  echo -e "                      MADE BY  S H A D O W  ⚡${NC}"
+  sleep 0.05
+done
 
-sleep 0.1
-  done
+# Հիմնական ստատիկ բանները (Gradient տեսքով) մենյուի համար
+clear
+echo -e "${R1} ███████╗ ██╗  ██╗  █████╗  ██████╗   ██████╗  ██╗    ██╗"
+echo -e "${R1} ██╔════╝ ██║  ██║ ██╔══██╗ ██╔══██╗ ██╔═══██╗ ██║    ██║"
+echo -e "${Y1} ███████╗ ███████║ ███████║ ██║  ██║ ██║   ██║ ██║ █╗ ██║"
+echo -e "${G1} ╚════██║ ██╔══██║ ██╔══██║ ██║  ██║ ██║   ██║ ██║███╗██║"
+echo -e "${G1} ███████║ ██║  ██║ ██║  ██║ ██████╔╝ ╚██████╔╝ ╚███╔███╔╝"
+echo -e "${G1} ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝   ╚═════╝   ╚══╝╚══╝"
+echo -e "                      ${Y1}MADE BY  ${R1}S H A D O W  ⚡${NC}"
+echo -e ""
+echo -e "${CYAN}=================================================${NC}"
+echo -e "${MAG}         ⚡ ShadowCraftMC Control Panel ⚡        ${NC}"
+echo -e "${CYAN}=================================================${NC}"
+
+# =========================
+# 🔐 HIDDEN LINKS (BASE64)
+# =========================
+decode() { echo "$1" | base64 -d; }
+
+PANEL="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3BhbmVsLnNo"
+WINGS="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3dpbmdzLnNo"
+UPDATE="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3VwLnNo"
+UNINSTALL="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3VuaW5zdGFsbC5zaA=="
+BLUEPRINT="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL2JsdWVwcmludC5zaA=="
+CLOUDFLARE="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL2Nsb3VkZmxhcmUuc2g="
+THEME="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3RoLnNo"
+TAILSCALE="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3Y0LnNo"
+DATABASE="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL2RhdGFiYXNlLnNo"
+
+run() {
+  url=$(decode "$1")
+  bash <(curl -fsSL "$url")
 }
 
+#=======================
+# LOADING CODE
+#=======================
 
-# =========================
-# LOADING
-# =========================
 loading() {
 echo -ne "${CYAN}Loading"
 for i in {1..3}; do
