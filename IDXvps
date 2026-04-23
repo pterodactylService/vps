@@ -125,13 +125,7 @@ while true; do
 
   cd || exit
   rm -rf myapp flutter
-
-  if [ ! -d "vps123" ]; then
-    echo -e "${R1}Folder vps123 not found!${NC}"
-    sleep 2
-    continue
-  fi
-
+  mkdir -p vps123
   cd vps123
 
   if [ ! -d ".idx" ]; then
@@ -141,7 +135,6 @@ while true; do
 cat <<EOF > dev.nix
 { pkgs, ... }: {
   channel = "stable-24.05";
-
   packages = with pkgs; [
     unzip
     openssh
