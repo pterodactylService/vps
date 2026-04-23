@@ -107,7 +107,7 @@ while true; do
   echo -e "${G1}[1] GitHub Real VPS${RESET}"
   echo -e "${BLUE}[2] Google IDX Real VPS${RESET}"
   echo -e "${R1}[3] Real VPS - Any location${RESET}"
-  echo -e "${CYAN}[4] Exit${RESET}"
+  echo -e "${CYAN}[0] Exit${RESET}"
   echo ""
 
   read -p "$(echo -e ${YELLOW}Enter choice [1-4]: ${RESET})" choice
@@ -121,25 +121,25 @@ while true; do
       ;;
 
     2)
-      loading
-      echo -e "${BLUE}Running IDX VPS...${RESET}"
+  loading
+  echo -e "${BLUE}Running IDX VPS...${NC}"
 
-      cd || exit
-      rm -rf myapp flutter
+  cd || exit
+  rm -rf myapp flutter
 
-      if [ ! -d "vps123" ]; then
-        echo -e "${RED}Folder vps123 not found!${RESET}"
-        sleep 2
-        continue
-      fi
+  if [ ! -d "vps123" ]; then
+    echo -e "${R1}Folder vps123 not found!${NC}"
+    sleep 2
+    continue
+  fi
 
-      cd vps123
+  cd vps123
 
-      if [ ! -d ".idx" ]; then
-        mkdir .idx
-        cd .idx
+  if [ ! -d ".idx" ]; then
+    mkdir .idx
+    cd .idx
 
-        cat <<EOF > dev.nix
+cat <<EOF > dev.nix
 { pkgs, ... }: {
   channel = "stable-24.05";
 
@@ -177,27 +177,26 @@ while true; do
 }
 EOF
 
-        cd ..
-      fi
+    cd ..
+  fi
 
-      read -p "Continue? (y/n): " confirm
-      case "$confirm" in
-        [yY]*)
-          bash <(curl -fsSL https://raw.githubusercontent.com/shadowcodeofficial/vm/refs/heads/main/vps.sh)
-          ;;
-        *)
-          echo "Cancelled"
-          ;;
-      esac
+  read -p "Continue? (y/n): " confirm
+  case "$confirm" in
+    [yY]*)
+      bash <(curl -fsSL https://raw.githubusercontent.com/shadowcodeofficial/vm/refs/heads/main/vps.sh)
       ;;
-
+    *)
+      echo "Cancelled"
+      ;;
+  esac
+  ;;
     3)
       loading
       echo -e "${CYAN}Running Real VPS (Any Location)...${RESET}"
       bash <(curl -fsSL https://raw.githubusercontent.com/pterodactylService/vps/refs/heads/main/nokvm.sh)
       ;;
 
-    4)
+    0)
       echo -e "${RED}Exiting...${RESET}"
       exit 0
       ;;
