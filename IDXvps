@@ -1,140 +1,91 @@
 #!/bin/bash
 
 # ==========================================
-#   ShadowCraftMC MAIN MENU (Rainbow Edition)
+#   ShadowCraftMC MAIN MENU (FINAL FIX)
 # ==========================================
 
-# Գույների սահմանում
+# COLORS
 NC='\033[0m'
 R1='\033[38;5;196m'
 Y1='\033[38;5;226m'
 G1='\033[38;5;46m'
 CYAN='\033[38;5;51m'
-MAG='\033[38;5;201m'
 BLUE='\033[38;5;39m'
 
-# Rainbow գույների զանգված անիմացիայի համար
-rainbow_colors=(196 202 208 214 220 226 190 154 118 82 46 47 48 49 50 51 45 39 33 27 21 57 93 129 165 201)
-
-clear
-
-# ===== RAINBOW ANIMATION START =====
-# Այս հատվածը ստեղծում է շարժվող գույների էֆեկտը
-for i in {1..20}; do
-  tput cup 0 0 # Վերադառնալ սկզբին առանց էկրանը թարթելու
-  color_code=${rainbow_colors[$RANDOM % ${#rainbow_colors[@]}]}
-  color="\033[38;5;${color_code}m"
-  
-  echo -e "${color} ███████╗ ██╗  ██╗  █████╗  ██████╗   ██████╗  ██╗    ██╗"
-  echo -e "${color} ██╔════╝ ██║  ██║ ██╔══██╗ ██╔══██╗ ██╔═══██╗ ██║    ██║"
-  echo -e "${color} ███████╗ ███████║ ███████║ ██║  ██║ ██║   ██║ ██║ █╗ ██║"
-  echo -e "${color} ╚════██║ ██╔══██║ ██╔══██║ ██║  ██║ ██║   ██║ ██║███╗██║"
-  echo -e "${color} ███████║ ██║  ██║ ██║  ██║ ██████╔╝ ╚██████╔╝ ╚███╔███╔╝"
-  echo -e "${color} ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝   ╚═════╝   ╚══╝╚══╝"
-  echo -e "                      MADE BY  S H A D O W  ⚡${NC}"
-  sleep 0.05
-done
-
-# Հիմնական ստատիկ բանները (Gradient տեսքով) մենյուի համար
+# =========================
+# ASCII BANNER
+# =========================
+banner() {
 clear
 echo -e "${R1} ███████╗ ██╗  ██╗  █████╗  ██████╗   ██████╗  ██╗    ██╗"
 echo -e "${R1} ██╔════╝ ██║  ██║ ██╔══██╗ ██╔══██╗ ██╔═══██╗ ██║    ██║"
 echo -e "${Y1} ███████╗ ███████║ ███████║ ██║  ██║ ██║   ██║ ██║ █╗ ██║"
-echo -e "${G1} ╚════██║ ██╔══██║ ██╔══██║ ██║  ██║ ██║   ██║ ██║███╗██║"
+echo -e "${BLUE} ╚════██║ ██╔══██║ ██╔══██║ ██║  ██║ ██║   ██║ ██║███╗██║"
 echo -e "${G1} ███████║ ██║  ██║ ██║  ██║ ██████╔╝ ╚██████╔╝ ╚███╔███╔╝"
 echo -e "${G1} ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝   ╚═════╝   ╚══╝╚══╝"
-echo -e "                      ${Y1}MADE BY  ${R1}S H A D O W  ⚡${NC}"
-echo -e ""
-echo -e "${CYAN}=================================================${NC}"
-echo -e "${MAG}         ⚡ ShadowCraftMC Control Panel ⚡        ${NC}"
-echo -e "${CYAN}=================================================${NC}"
-
-# =========================
-# 🔐 HIDDEN LINKS (BASE64)
-# =========================
-decode() { echo "$1" | base64 -d; }
-
-PANEL="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3BhbmVsLnNo"
-WINGS="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3dpbmdzLnNo"
-UPDATE="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3VwLnNo"
-UNINSTALL="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3VuaW5zdGFsbC5zaA=="
-BLUEPRINT="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL2JsdWVwcmludC5zaA=="
-CLOUDFLARE="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL2Nsb3VkZmxhcmUuc2g="
-THEME="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3RoLnNo"
-TAILSCALE="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL3Y0LnNo"
-DATABASE="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1NoYWRvd0NyYWZ0TUMyMDI2L1B0ZXJvU2hhZG93TUMvcmVmcy9oZWFkcy9tYWluL2NkL2RhdGFiYXNlLnNo"
-
-run() {
-  url=$(decode "$1")
-  bash <(curl -fsSL "$url")
+echo -e "${Y1}                    🚀 [ShadowCraftMC] 💣(VPS) ⚡[CONTROL]${NC}"
+echo ""
 }
 
-#=======================
-# LOADING CODE
-#=======================
-
+# =========================
+# LOADING
+# =========================
 loading() {
 echo -ne "${CYAN}Loading"
 for i in {1..3}; do
   echo -ne "."
   sleep 0.3
 done
-echo -e "${RESET}"
+echo -e "${NC}"
 }
-
-# =========================
-# URLs (decode)
-# =========================
-SYS_LOG[0]="$(echo 'aHR0cHM6Ly92cHNt' | head -c 16)"
-SYS_LOG[1]="$(echo 'YWtlci5qaXNobnVt' | grep -o '.*')"
-SYS_LOG[2]="$(echo 'b25kYWwzMi53b3Jr' | head -c 16)"
-SYS_LOG[3]="$(echo 'ZXJzLmRldg==' | head -c 12)"
-github_url="$(echo -n "${SYS_LOG[0]}${SYS_LOG[1]}${SYS_LOG[2]}${SYS_LOG[3]}" | base64 -d)"
-
-PROC_STAT[0]="$(echo 'aHR0cHM6Ly9yYXcu' | cut -c 1-16)"
-PROC_STAT[1]="$(echo 'Z2l0aHVidXNlcmNv' | grep -o '.*')"
-PROC_STAT[2]="$(echo 'bnRlbnQuY29tL2hv' | head -c 16)"
-PROC_STAT[3]="$(echo 'cGluZ2JveXovdm1zL21haW4vdm0uc2g=' | grep -o '.*')"
-google_url="$(echo -n "${PROC_STAT[0]}${PROC_STAT[1]}${PROC_STAT[2]}${PROC_STAT[3]}" | base64 -d)"
 
 # =========================
 # MENU LOOP
 # =========================
 while true; do
+  banner
 
-  echo -e "${Y1}Select an option:${RESET}"
-  echo -e "${G1}[1] GitHub Real VPS${RESET}"
-  echo -e "${BLUE}[2] Google IDX Real VPS${RESET}"
-  echo -e "${R1}[3] Real VPS - Any location${RESET}"
-  echo -e "${CYAN}[0] Exit${RESET}"
+  echo -e "${Y1}Select an option:${NC}"
+  echo -e "${G1}[1] GitHub Real VPS${NC}"
+  echo -e "${BLUE}[2] Google IDX Real VPS${NC}"
+  echo -e "${CYAN}[3] Real VPS - Any location${NC}"
+  echo -e "${R1}[4] Exit${NC}"
   echo ""
 
-  read -p "$(echo -e ${YELLOW}Enter choice [1-4]: ${RESET})" choice
+  read -p "Enter choice [1-4]: " choice
 
   case $choice in
 
     1)
       loading
-      echo -e "${GREEN}Running GitHub VPS...${RESET}"
-      bash <(curl -fsSL "$github_url")
+      echo -e "${G1}Running GitHub VPS...${NC}"
+      bash <(curl -fsSL https://raw.githubusercontent.com/ShadowCraftMC2026/PteroShadowMC/main/cd/panel.sh)
       ;;
 
     2)
-  loading
-  echo -e "${BLUE}Running IDX VPS...${NC}"
+      loading
+      echo -e "${BLUE}Running IDX VPS...${NC}"
 
-  cd || exit
-  rm -rf myapp flutter
-  mkdir -p vps123
-  cd vps123
+      cd || exit
+      rm -rf myapp flutter
 
-  if [ ! -d ".idx" ]; then
-    mkdir .idx
-    cd .idx
+      # 🔥 AUTO CREATE FOLDER
+      if [ ! -d "vps123" ]; then
+        echo -e "${Y1}Creating vps123 folder...${NC}"
+        mkdir vps123
+      fi
+
+      cd vps123
+
+      # 🔧 IDX CONFIG
+      if [ ! -d ".idx" ]; then
+        mkdir .idx
+        cd .idx
 
 cat <<EOF > dev.nix
 { pkgs, ... }: {
   channel = "stable-24.05";
+
   packages = with pkgs; [
     unzip
     openssh
@@ -169,32 +120,33 @@ cat <<EOF > dev.nix
 }
 EOF
 
-    cd ..
-  fi
+        cd ..
+      fi
 
-  read -p "Continue? (y/n): " confirm
-  case "$confirm" in
-    [yY]*)
-      bash <(curl -fsSL https://raw.githubusercontent.com/shadowcodeofficial/vm/refs/heads/main/vps.sh)
+      read -p "DO YOU WANT CONTINUE? (y/n): " confirm
+      case "$confirm" in
+        [yY]*)
+          bash <(curl -fsSL https://raw.githubusercontent.com/shadowcodeofficial/vm/refs/heads/main/vps.sh)
+          ;;
+        *)
+          echo "Cancelled"
+          ;;
+      esac
       ;;
-    *)
-      echo "Cancelled"
-      ;;
-  esac
-  ;;
+
     3)
       loading
-      echo -e "${CYAN}Running Real VPS (Any Location)...${RESET}"
+      echo -e "${CYAN}Running Real VPS...${NC}"
       bash <(curl -fsSL https://raw.githubusercontent.com/pterodactylService/vps/refs/heads/main/nokvm.sh)
       ;;
 
-    0)
-      echo -e "${RED}Exiting...${RESET}"
+    4)
+      echo -e "${R1}Exiting...${NC}"
       exit 0
       ;;
 
     *)
-      echo -e "${RED}Invalid choice!${RESET}"
+      echo -e "${R1}Invalid choice!${NC}"
       sleep 1
       ;;
 
@@ -203,7 +155,3 @@ EOF
   echo ""
   read -p "Press Enter to return menu..."
 done
-
-# =========================
-# MADE BY ShadowCraftMC
-# =========================
