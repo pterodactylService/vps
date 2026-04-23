@@ -31,11 +31,11 @@ for i in {1..20}; do
   echo -e "${color} ███████║ ██║  ██║ ██║  ██║ ██████╔╝ ╚██████╔╝ ╚███╔███╔╝"
   echo -e "${color} ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝   ╚═════╝   ╚══╝╚══╝"
   echo -e "                      <<<[P O W E R E D] [B Y]  [S H A D O W]  🚀${NC}"
-done
 
-EOF
-echo -e "${RESET}"
+sleep 0.1
+  done
 }
+
 
 # =========================
 # LOADING
